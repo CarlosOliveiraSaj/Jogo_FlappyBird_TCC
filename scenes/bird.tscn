@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://dfqwl5cas6jpj"]
+
+[ext_resource type="Texture2D" uid="uid://t0pjr6jekup1" path="res://assets/yellowbird-downflap.png" id="1_hq4t0"]
+[ext_resource type="Script" uid="uid://d1tcnny24baom" path="res://scripts/Bird.cs" id="1_twsrt"]
+[ext_resource type="Texture2D" uid="uid://d161lcb8o1p8u" path="res://assets/yellowbird-midflap.png" id="2_twsrt"]
+[ext_resource type="Texture2D" uid="uid://dsj1ycrpkv2w3" path="res://assets/yellowbird-upflap.png" id="3_b7mtg"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bdh3x"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_hq4t0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_twsrt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_b7mtg")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="Bird" type="CharacterBody2D" unique_id=1211573576 groups=["bird"]]
+script = ExtResource("1_twsrt")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1365340086]
+sprite_frames = SubResource("SpriteFrames_bdh3x")
+autoplay = "default"
+frame_progress = 0.2637335
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1596537279]
+polygon = PackedVector2Array(-5, -10, 7, -10, 12, -6, 16, 3, 12, 9, 2, 11, -6, 11, -16, 3, -11, -8)
+
+[node name="Arrow" type="Line2D" parent="." unique_id=2051602705]
+width = 4.0

@@ -1,0 +1,93 @@
+[gd_scene format=3 uid="uid://jiht6ehmjxa0"]
+
+[ext_resource type="Texture2D" uid="uid://6rnponr74u3x" path="res://assets/background-day.png" id="1_dm8bi"]
+[ext_resource type="Script" uid="uid://cwdgq83gwyxub" path="res://scripts/Mainview.cs" id="1_ksobk"]
+[ext_resource type="Texture2D" uid="uid://b4bwon66v1sgc" path="res://assets/gameover.png" id="2_1toi8"]
+[ext_resource type="Texture2D" uid="uid://bkicckl6vykn2" path="res://assets/taptap.png" id="3_bkduj"]
+[ext_resource type="FontFile" uid="uid://cn5tqtcek1q1t" path="res://assets/Kenney Blocks.ttf" id="4_sq44g"]
+[ext_resource type="Script" uid="uid://36w11qao45sv" path="res://scripts/TouchArea.cs" id="5_1toi8"]
+[ext_resource type="PackedScene" uid="uid://dfqwl5cas6jpj" path="res://scenes/bird.tscn" id="7_3e48y"]
+[ext_resource type="PackedScene" uid="uid://clg47bsdkeumu" path="res://scenes/ground.tscn" id="8_xgbna"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ksobk"]
+font = ExtResource("4_sq44g")
+font_size = 25
+font_color = Color(0, 0, 0, 1)
+outline_size = 6
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dm8bi"]
+size = Vector2(296, 522)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1toi8"]
+size = Vector2(25, 555)
+
+[node name="MainView" type="Node2D" unique_id=1857346454]
+script = ExtResource("1_ksobk")
+
+[node name="FundoLayer" type="CanvasLayer" parent="." unique_id=703518802]
+layer = -1
+
+[node name="TextureRect" type="TextureRect" parent="FundoLayer" unique_id=494882425]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_dm8bi")
+
+[node name="UILayer" type="CanvasLayer" parent="." unique_id=1013391312]
+
+[node name="GameOver" type="TextureRect" parent="UILayer" unique_id=739347541]
+visible = false
+offset_left = 45.0
+offset_top = 67.0
+offset_right = 237.0
+offset_bottom = 109.0
+texture = ExtResource("2_1toi8")
+
+[node name="Tutorial" type="TextureRect" parent="UILayer" unique_id=900671140]
+visible = false
+offset_left = 53.0
+offset_top = 126.0
+offset_right = 237.0
+offset_bottom = 235.0
+texture = ExtResource("3_bkduj")
+
+[node name="ScoreLabel" type="Label" parent="UILayer" unique_id=1613188807]
+visible = false
+offset_left = 132.0
+offset_top = 16.0
+offset_right = 172.0
+offset_bottom = 55.0
+text = "0"
+label_settings = SubResource("LabelSettings_ksobk")
+
+[node name="RestartButton" type="Button" parent="UILayer" unique_id=23632634]
+visible = false
+offset_left = 95.0
+offset_top = 417.0
+offset_right = 160.0
+offset_bottom = 448.0
+text = "Restart"
+
+[node name="Timer" type="Timer" parent="." unique_id=1610019163]
+wait_time = 2.0
+one_shot = true
+
+[node name="TouchArea" type="Area2D" parent="." unique_id=2082075188]
+script = ExtResource("5_1toi8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TouchArea" unique_id=430459336]
+position = Vector2(144, 256)
+shape = SubResource("RectangleShape2D_dm8bi")
+
+[node name="ResetArea" type="Area2D" parent="." unique_id=2019070702]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ResetArea" unique_id=1891572722]
+position = Vector2(-117, 256)
+shape = SubResource("RectangleShape2D_1toi8")
+
+[node name="Bird" parent="." unique_id=1211573576 instance=ExtResource("7_3e48y")]
+position = Vector2(90, 271)
+
+[node name="Ground" parent="." unique_id=2093264324 instance=ExtResource("8_xgbna")]
+position = Vector2(143, 506)
+
+[connection signal="DidTouch" from="TouchArea" to="." method="OnTouchAreaDidTouch"]
